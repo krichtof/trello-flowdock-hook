@@ -10,4 +10,9 @@ gem 'foreman'
 
 group :development do
   gem 'heroku'
+  gem 'pry'
+end
+
+group :test do
+  gem "mocha", require: false
 end

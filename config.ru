@@ -7,5 +7,10 @@ require 'faraday'
 
 require 'json'
 
-require './app'
+$: << File.dirname(__FILE__)
+$: << File.join(File.dirname(__FILE__), "lib")
+
+require './init.rb'
+
+require 'app'
 run App

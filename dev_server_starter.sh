@@ -1,0 +1,6 @@
+#!/bin/bash
+
+export FLOWDOCK_TOKEN=3ef2d0b654bbff1dbd7b4a4e681635f8
+export TRELLO_DEVELOPER_API_KEY=8297658ed597f880dc25dea18aaa7737
+
+bundle exec rackup

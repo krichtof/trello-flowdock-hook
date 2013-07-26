@@ -1,12 +1,16 @@
-require './lib/trello_event'
-require './lib/flowdock_poster'
+require 'trello_event'
+require 'flowdock_poster'
 
 class App < Sinatra::Base
 
   helpers do
     def flowdock
-      @flowdock ||= FlowDockPoster.new ENV['FLOWDOCK_TOKEN'], "lukasz+test@geckoboard.com"
+      @flowdock ||= FlowDockPoster.new ::APP_FLOWDOCK_TOKEN , "lukasz+test@geckoboard.com"
     end
+  end
+
+  get "/get_auth_token" do
+    redirect "https://trello.com/1/authorize?key=#{::APP_TRELLO_DEVELOPER_API_KEY}&name=TrelloFlowDockHook&response_type=token&scope=read,account&expiration=never", 302
   end
 
   get "/" do

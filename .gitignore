@@ -1,4 +1,6 @@
-bin
-vendor
-.bundle
-env.sh
+/bin
+/vendor
+/.bundle
+/env.sh
+/.idea
+

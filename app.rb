@@ -26,6 +26,7 @@ class App < Sinatra::Base
     "Hello!"
   end
 
+  head("/callback") { }
   post "/callback" do
     # TODO document this
     payload = env['rack.input'].read

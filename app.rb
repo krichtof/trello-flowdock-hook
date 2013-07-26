@@ -15,6 +15,10 @@ class App < Sinatra::Base
   end
 
   post "/callback" do
+    status 410
+  end
+
+  post "/callback2" do
     payload = env['rack.input'].read
     payload += "="*80
     payload += "\n"

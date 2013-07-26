@@ -27,6 +27,11 @@ class App < Sinatra::Base
   end
 
   post "/callback" do
+    status 410
+  end
+
+  post "/webhook" do
+    # TODO document this
     if ENV['UNREGISTER']
       status 410
       body "bye"

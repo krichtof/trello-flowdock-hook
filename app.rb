@@ -16,6 +16,8 @@ class App < Sinatra::Base
 
   post "/callback" do
     payload = env['rack.input'].read
+    payload += "="*80
+    payload += params.to_json
 
     @flowdock.post "/v1/messages/team_inbox/#{@flowdock_token}", {
       :source => 'trello webhook',

@@ -14,7 +14,7 @@ class App < Sinatra::Base
     "HELLO BOYS"
   end
 
-  post "/webook" do
+  post "/callback" do
     payload = env['rack.input'].read
 
     @flowdock.post "/v1/messages/team_inbox/#{flowdock_token}", {

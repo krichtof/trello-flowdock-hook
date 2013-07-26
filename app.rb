@@ -1,12 +1,11 @@
 require 'trello_event'
 require 'flowdock_poster'
 
+
 class App < Sinatra::Base
 
-  helpers do
-    def flowdock
-      @flowdock ||= FlowDockPoster.new ::APP_FLOWDOCK_TOKEN , "lukasz+test@geckoboard.com"
-    end
+  def flowdock
+    @flowdock ||= FlowDockPoster.new ::APP_FLOWDOCK_TOKEN , "lukasz+test@geckoboard.com"
   end
 
   get "/get_auth_token" do

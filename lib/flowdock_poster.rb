@@ -1,16 +1,23 @@
 class FlowDockPoster
   def initialize room_token, from_address
     @room_token = room_token
-    @from_addres = from_address
+    @from_address = from_address
 
     @client = Faraday.new(:url => 'https://api.flowdock.com') do |faraday|
       faraday.request :url_encoded
+      faraday.response :logger
       faraday.adapter Faraday.default_adapter
     end
   end
 
   def send_to_inbox payload
-    @client.post "/v1/messages/team_inbox/#{@room_token}", post_data(payload)
+    data = post_data(payload)
+    response = @client.post "/v1/messages/team_inbox/#{@room_token}", data
+    if response.status >= 300
+      raise "FlowDock error!: #{response.body}"
+    else
+      "Posted to Flowdock!"
+    end
   end
 
   def post_data payload

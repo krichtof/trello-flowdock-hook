@@ -10,22 +10,8 @@ class App < Sinatra::Base
 
   end
 
-  get "/" do
-    "HELLO BOYS"
-  end
-
-  post "/callback" do
-    status 410
-  end
-
-  post "/callback2" do
-    payload = env['rack.input'].read
-    payload += "="*80
-    payload += "\n"
-    payload += params.to_json
-    payload += "\n"
-    payload += env.to_json
-
+  helpers do
+    def flowdock_post payload
     @flowdock.post "/v1/messages/team_inbox/#{@flowdock_token}", {
       :source => 'trello webhook',
         :from_address => 'lukasz+trello@ggeckoboard.com',
@@ -33,7 +19,22 @@ class App < Sinatra::Base
         :content => payload,
         :from_name => 'trello notifier',
         :project => 'trello notifier'}
+    end
+  end
 
+  get "/" do
+    "Hello!"
+  end
+
+  post "/callback" do
+    if ENV['UNREGISTER']
+      status 410
+      body "bye"
+    else
+      payload = env['rack.input'].read
+      flowdock_post payload
+      body "OK"
+    end
   end
 
 end

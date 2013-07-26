@@ -52,11 +52,11 @@ class TrelloEventTest < Minitest::Unit::TestCase
   end
 
   def test_subject
-    assert_equal "Moved to Doing: Sheep", event.subject
+    assert_equal "Łukasz Korecki: Moved to Doing: Sheep", event.subject
   end
 
   def test_content
-    assert_equal "<p>Updated</p>", event.content
+    assert_equal "<p>Updated</p><p><a href='https://trello.com/board/501a80c4f8461b35739989e3'>Board: https://trello.com/board/501a80c4f8461b35739989e3</a>", event.content
   end
 
   def test_from

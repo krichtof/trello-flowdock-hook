@@ -24,7 +24,9 @@ class TrelloEvent
     card_data = data['card'] || {}
     @card_link = "https://trello.com/card/#{@board_id}/#{card_data['idShort']}"
     card_name = card_data['name']
-    @subject, @content = process_event @result, card_name
+    subject, @content = process_event @result, card_name
+    @content += "<p><a href='#{@board_link}'>Board: #{@board_link}</a>"
+    @subject = "#@from: #{subject}"
     self
   end
 

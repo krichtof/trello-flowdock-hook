@@ -8,15 +8,26 @@ class App < Sinatra::Base
     @flowdock ||= FlowDockPoster.new ::APP_FLOWDOCK_TOKEN , "lukasz+test@geckoboard.com"
   end
 
-  get "/get_auth_token" do
-    redirect "https://trello.com/1/authorize?key=#{::APP_TRELLO_DEVELOPER_API_KEY}&name=TrelloFlowDockHook&response_type=token&scope=read,account&expiration=never", 302
+  def trello
+    @trello ||= TrelloClient.new  ::APP_TRELLO_DEVELOPER_API_KEY
+  end
+
+  get "/register-with-trello" do
+    redirect trello.authorize_url, 302
   end
 
   get "/" do
-    "Hello!"
+    content_type "text/html"
+    body <<-HTML
+    <html>
+    <title>Hi!</title>
+    <body>
+    <h1>Hello!</h1>
+    <p><a href="/register-with-trello">Register this application with Trello</a></p>
+    HTML
   end
 
-  post "/callback" do
+  post "/hook" do
     payload = env['rack.input'].read
     flowdock.send_to_inbox JSON.parse payload
     body "OK"

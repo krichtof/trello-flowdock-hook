@@ -2,12 +2,6 @@ class FlowDockPoster
   def initialize room_token, from_address
     @room_token = room_token
     @from_address = from_address
-
-    @client = Faraday.new(:url => 'https://api.flowdock.com') do |faraday|
-      faraday.request :url_encoded
-      faraday.response :logger
-      faraday.adapter Faraday.default_adapter
-    end
   end
 
   def send_to_inbox payload
@@ -33,5 +27,13 @@ class FlowDockPoster
       :from_address => @from_address,
       :format       => 'html'
     }
+  end
+
+  def client
+    @client ||= Faraday.new(:url => 'https://api.flowdock.com') do |faraday|
+      faraday.request :url_encoded
+      faraday.response :logger
+      faraday.adapter Faraday.default_adapter
+    end
   end
 end

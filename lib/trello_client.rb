@@ -16,7 +16,15 @@ class TrelloClient
 
 
   def register_app token, hook_url, board_id
-    response = client.post "/webhook?key=#@developer_key&webhookToken=#{token}&callbackURL=#{hook_url}&description=FlowdockHook&idModel=#{board_id}"
+    register_url = [
+      "/webhook?key=", @developer_key,
+      "&webhookToken=", token,
+      "&callbackURL=", hook_url,
+      "&description=FlowdockHook",
+      "&idModel=", board_id
+    ].join ''
+
+    response = client.post register_url
     [ resonse.status <= 300, response.body ]
   end
 

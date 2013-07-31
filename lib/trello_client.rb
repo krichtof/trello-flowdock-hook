@@ -9,7 +9,9 @@ class TrelloClient
       "https://trello.com/1/authorize?key=",
       @developer_key,
       "&name=TrelloFlowDockHook&response_type=token",
-      "&scope=read,account&expiration=never",
+      "&scope=read,account",
+      "&expiration=never",
+      "&return_url=",
       callback_url
     ].join ''
   end
@@ -25,7 +27,7 @@ class TrelloClient
     ].join ''
 
     response = client.post register_url
-    [ resonse.status <= 300, response.body ]
+    [ response.status <= 300, response.body ]
   end
 
   private

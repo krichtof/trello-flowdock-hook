@@ -1,4 +1,5 @@
 require 'trello_event'
+require 'trello_client'
 require 'flowdock_poster'
 
 
@@ -52,7 +53,8 @@ class App < Sinatra::Base
   end
 
   get "/register/:token" do |token|
-    ok, response = trello.register_app token, app_url()+"/hook",  ::APP_TRELLO_BOARD_ID
+    hook_url = app_url()+"/hook"
+    ok, response = trello.register_app token, hook_url, ::APP_TRELLO_BOARD_ID
     [ ok ? 201 : 400, response ]
   end
 

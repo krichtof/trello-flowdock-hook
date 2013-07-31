@@ -2,18 +2,34 @@
 
 ## TODO
 
-# Setup:
+# Deployment
 
-- deploy the app to heroku
-- add 2 config values:
+## Heroku
+
+- create the app to heroku
+- add 3 config values:
 
 ```
 heroku config:set FLOWDOCK_TOKEN=your-room-token
 heroku cconfig:set TRELLO_DEVELOPER_API_KEY=your-trello-dev-key
+heroku cconfig:set TRELLO_BOARD_ID=trello-board-id
+
+- deploy the app to heroku
+- visit `<app url>/register-with-trello` in your browser to register the app
+
+That's it!
 
 
-- deploy the app to heroku and visit `<app url>/get_auth_token`
+## Self-hosted
 
-# TODO
-- copy the token and use it to authorize the webhook on trello with `create_webhook.sh` script
-- That's it!
+Make sure your app is accessible publicly on any port, SSL is recomended!
+
+Start it with:
+
+```bash
+export FLOWDOCK_TOKEN=your-room-token
+export TRELLO_DEVELOPER_API_KEY=your-trello-dev-key
+export TRELLO_BOARD_ID=trello-board-id
+bundle && bundle unicorn -c unicorn.rb
+```
+- visit `<app url>/register-with-trello` in your browser to register the app

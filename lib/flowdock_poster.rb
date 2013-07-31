@@ -30,7 +30,7 @@ class FlowDockPoster
   end
 
   def client
-    @client ||= Faraday.new(:url => 'https://api.flowdock.com') do |faraday|
+    @client ||= Faraday.new(url: 'https://api.flowdock.com') do |faraday|
       faraday.request :url_encoded
       faraday.response :logger
       faraday.adapter Faraday.default_adapter

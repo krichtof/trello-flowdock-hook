@@ -19,7 +19,7 @@ class TrelloClient
 
   def register_app token, hook_url, board_id
     register_url = [
-      "/webhook?key=", @developer_key,
+      "/1/webhook?key=", @developer_key,
       "&webhookToken=", token,
       "&callbackURL=", hook_url,
       "&description=FlowdockHook",
@@ -32,7 +32,7 @@ class TrelloClient
 
   private
   def client
-    @client ||= Faraday.new(:url => 'https://trello.com/1') do |faraday|
+    @client ||= Faraday.new(url: 'https://trello.com') do |faraday|
       faraday.request :url_encoded
       faraday.response :logger
       faraday.adapter Faraday.default_adapter

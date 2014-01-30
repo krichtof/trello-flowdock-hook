@@ -31,6 +31,6 @@ Start it with:
 export FLOWDOCK_TOKEN=your-room-token
 export TRELLO_DEVELOPER_API_KEY=your-trello-dev-key
 export TRELLO_BOARD_ID=trello-board-id
-bundle && bundle unicorn -c unicorn.rb
+bundle && unicorn -c unicorn.rb
 ```
 - visit `<app url>/register-with-trello` in your browser to register the app
